@@ -24,4 +24,8 @@ public class UsuarioController {
         return "hello word";
     }
 
+    public String teste(){
+        return "Oieeee Victor";
+    }
+
 }
