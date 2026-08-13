@@ -19,5 +19,9 @@ public class UsuarioController {
 
         return usuario;
     }
+    @GetMapping
+    public String helloWord(){
+        return "hello word";
+    }
 
 }
