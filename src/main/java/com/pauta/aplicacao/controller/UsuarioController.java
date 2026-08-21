@@ -1,22 +1,32 @@
 package com.pauta.aplicacao.controller;
 
 import com.pauta.aplicacao.model.Usuario;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.pauta.aplicacao.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
+    @Autowired
+    private UsuarioRepository usuarioRepository;
     @GetMapping
-    public Usuario retornaUsuario() {
+    public List<Usuario> retornaUsuario() {
 
-        Usuario usuario = new Usuario();
-        usuario.setNome("Joao");
-        usuario.setCpf("12345");
-        usuario.setIdade(18);
-        usuario.setRua("Bartolomeu seila");
 
-        return usuario;
+
+        return usuarioRepository.findAll();
+    }
+    @PostMapping
+    public Usuario criarUsuario(@RequestBody Usuario usuario){
+
+        return usuarioRepository.save(usuario);
+
     }
 }
+//Creat = Criar
+//Read = Ler
+//Update = Atualizar
+//Delete = Deletar
