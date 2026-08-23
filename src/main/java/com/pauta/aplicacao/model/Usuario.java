@@ -4,12 +4,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Column;
 
 @Entity
 public class Usuario {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     private Long id;
+    // Garante que o nome seja obrigatorio e nao se repita no banco.
+    @Column(nullable = false, unique = true)
     private String nome;
     private int idade;
     private String cpf;
