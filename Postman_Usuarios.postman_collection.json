@@ -1,0 +1,82 @@
+{
+  "info": {
+    "_postman_id": "8a6a0d63-7a24-4e31-a4ce-usuarios",
+    "name": "Assembleia Votacao - Usuarios",
+    "description": "Requisicoes para testar a validacao de nome unico de usuarios.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ],
+  "item": [
+    {
+      "name": "Listar usuarios",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/usuario",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "usuario"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Cadastrar usuario",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Joao da Silva\",\n  \"idade\": 30,\n  \"cpf\": \"12345678900\",\n  \"rua\": \"Rua das Flores\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/usuario",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "usuario"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Validar nome duplicado (deve retornar 409)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Joao da Silva\",\n  \"idade\": 30,\n  \"cpf\": \"12345678900\",\n  \"rua\": \"Rua das Flores\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/usuario",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "usuario"
+          ]
+        }
+      }
+    }
+  ]
+}
