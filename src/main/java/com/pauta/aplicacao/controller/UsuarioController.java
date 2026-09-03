@@ -31,6 +31,14 @@ public class UsuarioController {
         }
         return usuarioRepository.save(usuario);
     }
+    @DeleteMapping("/deletar")
+    public String deletartudo(){
+    usuarioRepository.deleteAll();
+
+     return "Usuarios deletados";
+
+    }
+
 }
 
 //Creat = Criar
