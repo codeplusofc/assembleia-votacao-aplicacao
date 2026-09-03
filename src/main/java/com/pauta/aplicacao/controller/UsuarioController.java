@@ -12,13 +12,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
+
     @Autowired
     private UsuarioRepository usuarioRepository;
+
     @GetMapping
     public List<Usuario> retornaUsuario() {
-
-
-
         return usuarioRepository.findAll();
     }
     @PostMapping
@@ -30,9 +29,7 @@ public class UsuarioController {
                     "Já existe um usuário com este nome"
             );
         }
-
         return usuarioRepository.save(usuario);
-
     }
 }
 
