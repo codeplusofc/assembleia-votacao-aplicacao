@@ -26,7 +26,15 @@ public class UsuarioService {
     }
 
     public List<Usuario> listarUsuarios() {
-        return usuarioRepository.findAll();
+       List<Usuario> usuarios = usuarioRepository.findAll();
+       if (usuarios.isEmpty()){
+           throw new ResponseStatusException(
+                   HttpStatus.NOT_FOUND,
+                   "Não foi encontrado nada no banco de dados"
+           );
+
+       }
+        return usuarios;
     }
 
     public void deletarUsuarioPorId(Long id) {
