@@ -1,26 +1,22 @@
 package com.pauta.aplicacao.controller;
 
 import com.pauta.aplicacao.model.Pauta;
-import com.pauta.aplicacao.repository.PautaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.pauta.aplicacao.service.PautaService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/pauta")
+@RequestMapping("/pautas")
 public class PautaController {
 
-    @Autowired
-    private PautaRepository pautaRepository;
+    private final PautaService pautaService;
 
-    @PostMapping
-    public Pauta criarPauta(@RequestBody Pauta pauta) {
-        return pautaRepository.save(pauta);
+    public PautaController(PautaService pautaService) {
+        this.pautaService = pautaService;
     }
 
-    @GetMapping
-    public List<Pauta> listarPautas() {
-        return pautaRepository.findAll();
+    @GetMapping("/{id}")
+    public ResponseEntity<Pauta> buscarPautaPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(pautaService.buscarPorId(id));
     }
 }
