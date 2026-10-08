@@ -1,0 +1,33 @@
+package com.example;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
+@Service
+public class UserService {
+
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public User atualizarUsuario(Long id, User dadosAtualizados) {
+        User usuarioExistente = userRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Usuário com ID " + id + " não encontrado!"
+                ));
+
+        usuarioExistente.setNome(dadosAtualizados.getNome());
+        usuarioExistente.setEmail(dadosAtualizados.getEmail());
+        usuarioExistente.setTelefone(dadosAtualizados.getTelefone());
+
+        if (dadosAtualizados.getSenha() != null && !dadosAtualizados.getSenha().isBlank()) {
+            usuarioExistente.setSenha(dadosAtualizados.getSenha());
+        }
+
+        return userRepository.save(usuarioExistente);
+    }
+}
