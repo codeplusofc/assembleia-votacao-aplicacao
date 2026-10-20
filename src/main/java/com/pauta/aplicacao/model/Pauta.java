@@ -28,4 +28,12 @@ public class Pauta {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    public String getNomePauta() {
+        return nomePauta;
+    }
+
+    public void setNomePauta(String nomePauta) {
+        this.nomePauta = nomePauta;
+    }
 }

@@ -6,6 +6,9 @@ import com.pauta.aplicacao.repository.PautaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
+
 @Service
 public class PautaService {
 
@@ -49,6 +52,9 @@ public class PautaService {
         return pautaRepository.save(pauta);
     }
 
+    public List<Pauta> buscarPautas(){
+        return pautaRepository.findAll();
+    }
     }
 
 
