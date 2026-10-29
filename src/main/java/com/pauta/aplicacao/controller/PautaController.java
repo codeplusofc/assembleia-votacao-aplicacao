@@ -30,12 +30,6 @@ public class PautaController {
 
     @PostMapping
     public Pauta criarPauta(@RequestBody Pauta pauta) {
-        return pautaService.validacaopauta(pauta);
+        return pautaService.inserirPauta(pauta);
     }
-
-
-
-
 }
-
-//

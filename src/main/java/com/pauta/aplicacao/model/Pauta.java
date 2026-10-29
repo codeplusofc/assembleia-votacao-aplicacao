@@ -11,7 +11,7 @@ public class Pauta {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String descricao;
-    public String nomePauta;
+    public String nome;
 
     public Long getId() {
         return id;
@@ -29,11 +29,11 @@ public class Pauta {
         this.descricao = descricao;
     }
 
-    public String getNomePauta() {
-        return nomePauta;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomePauta(String nomePauta) {
-        this.nomePauta = nomePauta;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }
