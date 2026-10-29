@@ -18,7 +18,7 @@ public class PautaService {
         this.pautaRepository = pautaRepository;
     }
 
-    public Pauta pauta  = new Pauta();
+    public Pauta pauta = new Pauta();
 
     public Pauta buscarPorId(Long id) {
         return pautaRepository.findById(id)
@@ -28,34 +28,37 @@ public class PautaService {
                 ));
     }
 
+    public Pauta inserirPauta(Pauta pauta) {
+        validacaoPauta(pauta);
+        return pautaRepository.save(pauta);
+    }
 
+    private void validacaoPauta(Pauta pauta) {
+        pauta.getNome().trim();
 
-    public Pauta validacaopauta(Pauta pauta){
-        pauta.nomePauta = pauta.nomePauta.trim();
-
-        if (pauta.nomePauta == null || pauta.nomePauta.isBlank()){
+        if (pauta.getNome() == null || pauta.getNome().isBlank()) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
                     "O nome da pauta deve ter entre 3 e 100 caracteres");
         }
-        if (pauta.nomePauta.length() < 3 || pauta.nomePauta.length() > 100) {
+        if (pauta.getNome().length() < 3 || pauta.getNome().length() > 100) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
                     "O nome da pauta deve ter entre 3 e 100 caracteres");
         }
-        if (pautaRepository.existsByNome((pauta.nomePauta))) {
+        if (pautaRepository.existsByNome((pauta.getNome()))) {
             throw new ResponseStatusException(
                     HttpStatus.CONFLICT,
                     "Já existe uma Pauta com este nome"
             );
         }
-        return pautaRepository.save(pauta);
+
     }
 
-    public List<Pauta> buscarPautas(){
+    public List<Pauta> buscarPautas() {
         return pautaRepository.findAll();
     }
-    }
+}
 
 
 
