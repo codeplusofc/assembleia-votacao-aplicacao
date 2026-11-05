@@ -24,6 +24,10 @@ public class PautaService {
         return pautaRepository.findById(id);
     }
 
+    public Pauta inserirPauta(Pauta pauta) {
+        validacaoPauta(pauta);
+        return pautaRepository.save(pauta);
+    }
 
     public Pauta validacaopauta(Pauta pauta) {
         pauta.setNome(pauta.getNome().trim());
@@ -44,7 +48,7 @@ public class PautaService {
                     "Já existe uma Pauta com este nome"
             );
         }
-        return pautaRepository.save(pauta);
+
     }
 
     public List<Pauta> buscarPautas() {
