@@ -1,13 +1,13 @@
 package com.pauta.aplicacao.service;
 
 import com.pauta.aplicacao.model.Pauta;
-import com.pauta.aplicacao.model.Usuario;
 import com.pauta.aplicacao.repository.PautaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PautaService {
@@ -20,12 +20,8 @@ public class PautaService {
 
     public Pauta pauta = new Pauta();
 
-    public Pauta buscarPorId(Long id) {
-        return pautaRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "Pauta com ID " + id + " não encontrada."
-                ));
+    public Optional<Pauta> buscarPorId(Long id) {
+        return pautaRepository.findById(id);
     }
 
     public Pauta inserirPauta(Pauta pauta) {
@@ -33,8 +29,8 @@ public class PautaService {
         return pautaRepository.save(pauta);
     }
 
-    private void validacaoPauta(Pauta pauta) {
-        pauta.getNome().trim();
+    public Pauta validacaopauta(Pauta pauta) {
+        pauta.setNome(pauta.getNome().trim());
 
         if (pauta.getNome() == null || pauta.getNome().isBlank()) {
             throw new ResponseStatusException(
@@ -58,6 +54,7 @@ public class PautaService {
     public List<Pauta> buscarPautas() {
         return pautaRepository.findAll();
     }
+
 }
 
 

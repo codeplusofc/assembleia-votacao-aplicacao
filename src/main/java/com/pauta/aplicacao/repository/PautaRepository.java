@@ -9,5 +9,5 @@ import org.springframework.stereotype.Service;
 public interface PautaRepository extends JpaRepository<Pauta,Long> {
 
 
-    public boolean existsByNome(String nome);
+    boolean existsByNome(String nome);
 }

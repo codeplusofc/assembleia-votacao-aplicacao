@@ -11,7 +11,7 @@ public class Pauta {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String descricao;
-    public String nome;
+    private String nome;
 
     public Long getId() {
         return id;
