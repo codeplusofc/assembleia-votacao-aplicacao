@@ -7,16 +7,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/pautas")
 public class PautaController {
-    @Autowired
-    private final PautaService pautaService;
 
-    public PautaController(PautaService pautaService) {
-        this.pautaService = pautaService;
-    }
+    @Autowired
+    private PautaService pautaService;
 
     @GetMapping
     public List<Pauta> buscarPautas(){
@@ -24,18 +22,14 @@ public class PautaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Pauta> buscarPautaPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(pautaService.buscarPorId(id));
+    public Optional<Pauta> buscarPautaPorId(@PathVariable Long id) {
+        return pautaService.buscarPorId(id);
     }
 
     @PostMapping
     public Pauta criarPauta(@RequestBody Pauta pauta) {
         return pautaService.validacaopauta(pauta);
     }
-
-
-
-
 }
 
 //
