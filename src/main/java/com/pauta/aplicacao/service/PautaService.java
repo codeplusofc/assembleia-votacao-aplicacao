@@ -5,6 +5,9 @@ import com.pauta.aplicacao.repository.PautaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
+
 @Service
 public class PautaService {
 
@@ -20,5 +23,41 @@ public class PautaService {
                         HttpStatus.NOT_FOUND,
                         "Pauta com ID " + id + " não encontrada."
                 ));
+    }
+
+    public Pauta inserirPauta(Pauta pauta) {
+        validacaoPauta(pauta);
+        return pautaRepository.save(pauta);
+    }
+
+    private void validacaoPauta(Pauta pauta) {
+        if (pauta == null || pauta.getNome() == null || pauta.getNome().isBlank()) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "O nome da pauta deve ter entre 3 e 100 caracteres"
+            );
+        }
+
+        String nomeNormalizado = pauta.getNome().trim();
+
+        if (nomeNormalizado.length() < 3 || nomeNormalizado.length() > 100) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "O nome da pauta deve ter entre 3 e 100 caracteres"
+            );
+        }
+
+        pauta.setNome(nomeNormalizado);
+
+        if (pautaRepository.existsByNome(nomeNormalizado)) {
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT,
+                    "Já existe uma Pauta com este nome"
+            );
+        }
+    }
+
+    public List<Pauta> buscarPautas() {
+        return pautaRepository.findAll();
     }
 }
