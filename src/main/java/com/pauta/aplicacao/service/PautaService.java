@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PautaService {
@@ -17,12 +18,15 @@ public class PautaService {
         this.pautaRepository = pautaRepository;
     }
 
-    public Pauta buscarPorId(Long id) {
-        return pautaRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "Pauta com ID " + id + " não encontrada."
-                ));
+    public Pauta pauta = new Pauta();
+
+    public Optional<Pauta> buscarPorId(Long id) {
+        return pautaRepository.findById(id);
+    }
+
+    public Pauta inserirPauta(Pauta pauta) {
+        validacaoPauta(pauta);
+        return pautaRepository.save(pauta);
     }
 
     public Pauta inserirPauta(Pauta pauta) {
@@ -50,14 +54,34 @@ public class PautaService {
         pauta.setNome(nomeNormalizado);
 
         if (pautaRepository.existsByNome(nomeNormalizado)) {
+    public Pauta validacaopauta(Pauta pauta) {
+        pauta.setNome(pauta.getNome().trim());
+
+        if (pauta.getNome() == null || pauta.getNome().isBlank()) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "O nome da pauta deve ter entre 3 e 100 caracteres");
+        }
+        if (pauta.getNome().length() < 3 || pauta.getNome().length() > 100) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "O nome da pauta deve ter entre 3 e 100 caracteres");
+        }
+        if (pautaRepository.existsByNome((pauta.getNome()))) {
             throw new ResponseStatusException(
                     HttpStatus.CONFLICT,
                     "Já existe uma Pauta com este nome"
             );
         }
+
     }
 
     public List<Pauta> buscarPautas() {
         return pautaRepository.findAll();
     }
 }
+
+}
+
+
+

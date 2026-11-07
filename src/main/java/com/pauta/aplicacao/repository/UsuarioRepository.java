@@ -9,4 +9,7 @@ public interface UsuarioRepository extends JpaRepository <Usuario,Long> {
 
     // Consulta se ja existe um usuario cadastrado com o nome informado.
     boolean existsByNome(String nome);
+
+
+
 }
