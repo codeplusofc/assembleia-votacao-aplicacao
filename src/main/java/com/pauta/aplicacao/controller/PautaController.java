@@ -30,4 +30,16 @@ public class PautaController {
     public Pauta criarPauta(@RequestBody Pauta pauta) {
         return pautaService.inserirPauta(pauta);
     }
+    @GetMapping
+    public ResponseEntity<List<Pauta>> listarPautas() {
+        List<Pauta> pautas = pautaService.buscarPautas();
+        return ResponseEntity.ok(pautas);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Pauta> buscarPorId(@PathVariable Long id) {
+        Pauta pauta = pautaService.buscarPorId(id);
+        return ResponseEntity.ok(pauta);
+    }
+}
 }

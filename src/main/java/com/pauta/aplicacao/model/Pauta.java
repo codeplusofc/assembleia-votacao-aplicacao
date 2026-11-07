@@ -8,8 +8,17 @@ import jakarta.persistence.Id;
 @Entity
 public class Pauta {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String nome;
+
+
+    public Pauta() {
+    }
+
+    public Pauta(String nome) {
+        this.nome = nome;
+    }
     private String descricao;
     private String nome;
 
@@ -21,12 +30,12 @@ public class Pauta {
         this.id = id;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getNome() {
+        return nome;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getNome() {
