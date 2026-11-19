@@ -32,4 +32,12 @@ public class UsuarioService {
     public void deletarUsuarioPorId(Long id) {
         usuarioRepository.deleteById(id);
     }
+
+    public Usuario buscarPorId(Long id) {
+        return usuarioRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Usuário com ID " + id + " não encontrado."
+                ));
+    }
 }
