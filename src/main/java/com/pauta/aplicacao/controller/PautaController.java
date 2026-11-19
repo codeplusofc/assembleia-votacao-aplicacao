@@ -2,44 +2,45 @@ package com.pauta.aplicacao.controller;
 
 import com.pauta.aplicacao.model.Pauta;
 import com.pauta.aplicacao.service.PautaService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/pautas")
 public class PautaController {
 
-    @Autowired
-    private PautaService pautaService;
+    private final PautaService pautaService;
+
+    public PautaController(PautaService pautaService) {
+        this.pautaService = pautaService;
+    }
 
     @GetMapping
-    public List<Pauta> buscarPautas(){
+    public List<Pauta> buscarPautas() {
         return pautaService.buscarPautas();
     }
 
     @GetMapping("/{id}")
-    public Optional<Pauta> buscarPautaPorId(@PathVariable Long id) {
-        return pautaService.buscarPorId(id);
+    public ResponseEntity<Pauta> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.of(pautaService.buscarPorId(id));
     }
 
     @PostMapping
     public Pauta criarPauta(@RequestBody Pauta pauta) {
         return pautaService.inserirPauta(pauta);
     }
-    @GetMapping
-    public ResponseEntity<List<Pauta>> listarPautas() {
-        List<Pauta> pautas = pautaService.buscarPautas();
-        return ResponseEntity.ok(pautas);
-    }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Pauta> buscarPorId(@PathVariable Long id) {
-        Pauta pauta = pautaService.buscarPorId(id);
-        return ResponseEntity.ok(pauta);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarPauta(@PathVariable Long id) {
+        pautaService.deletarPautaPorId(id);
+        return ResponseEntity.noContent().build();
     }
-}
 }

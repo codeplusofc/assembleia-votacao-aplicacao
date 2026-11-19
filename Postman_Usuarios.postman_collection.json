@@ -9,6 +9,10 @@
     {
       "key": "baseUrl",
       "value": "http://localhost:8080"
+    },
+    {
+      "key": "usuarioId",
+      "value": "1"
     }
   ],
   "item": [
@@ -18,12 +22,12 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}/usuario",
+          "raw": "{{baseUrl}}/usuarios",
           "host": [
             "{{baseUrl}}"
           ],
           "path": [
-            "usuario"
+            "usuarios"
           ]
         }
       }
@@ -43,12 +47,12 @@
           "raw": "{\n  \"nome\": \"Joao da Silva\",\n  \"idade\": 30,\n  \"cpf\": \"12345678900\",\n  \"rua\": \"Rua das Flores\"\n}"
         },
         "url": {
-          "raw": "{{baseUrl}}/usuario",
+          "raw": "{{baseUrl}}/usuarios",
           "host": [
             "{{baseUrl}}"
           ],
           "path": [
-            "usuario"
+            "usuarios"
           ]
         }
       }
@@ -68,12 +72,38 @@
           "raw": "{\n  \"nome\": \"Joao da Silva\",\n  \"idade\": 30,\n  \"cpf\": \"12345678900\",\n  \"rua\": \"Rua das Flores\"\n}"
         },
         "url": {
-          "raw": "{{baseUrl}}/usuario",
+          "raw": "{{baseUrl}}/usuarios",
           "host": [
             "{{baseUrl}}"
           ],
           "path": [
-            "usuario"
+            "usuarios"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Atualizar parcialmente usuario",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"joao.novo@example.com\",\n  \"rua\": \"Avenida Central, 100\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/usuarios/{{usuarioId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "usuarios",
+            "{{usuarioId}}"
           ]
         }
       }

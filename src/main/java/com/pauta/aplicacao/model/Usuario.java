@@ -15,7 +15,11 @@ public class Usuario {
     @Column(nullable = false, unique = true)
     private String nome;
     private int idade;
+    // CPF e e-mail também são únicos no cadastro.
+    @Column(unique = true)
     private String cpf;
+    @Column(unique = true)
+    private String email;
     private String rua;
 
     public Long getId() {
@@ -48,6 +52,14 @@ public class Usuario {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getRua() {

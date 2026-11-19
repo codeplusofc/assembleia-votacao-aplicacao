@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assembleia - Painel de Testes</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <main class="container">
+        <header class="hero">
+            <div>
+                <p class="eyebrow">Painel de testes</p>
+                <h1>Assembleia de votação</h1>
+            </div>
+            <div class="status"><span></span> API online</div>
+        </header>
+
+        <section class="grid">
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <p class="eyebrow">Cadastro</p>
+                        <h2>Novo usuário</h2>
+                    </div>
+                </div>
+                <form id="usuario-form">
+                    <label>Nome
+                        <input name="nome" required placeholder="Nome completo">
+                    </label>
+                    <div class="form-row">
+                        <label>Idade
+                            <input name="idade" type="number" min="1" required placeholder="18">
+                        </label>
+                        <label>CPF
+                            <input name="cpf" placeholder="000.000.000-00">
+                        </label>
+                    </div>
+                    <label>E-mail
+                        <input name="email" type="email" placeholder="nome@email.com">
+                    </label>
+                    <label>Rua
+                        <input name="rua" placeholder="Rua, número">
+                    </label>
+                    <div id="usuario-mensagem" class="message" aria-live="polite"></div>
+                    <button type="submit">Cadastrar usuário</button>
+                </form>
+            </article>
+
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <p class="eyebrow">Cadastro</p>
+                        <h2>Nova pauta</h2>
+                    </div>
+                </div>
+                <form id="pauta-form">
+                    <label>Nome da pauta
+                        <input name="nome" required minlength="3" maxlength="100" placeholder="Ex: Nova sede">
+                    </label>
+                    <label>Descrição
+                        <textarea name="descricao" rows="5" placeholder="Descreva a pauta"></textarea>
+                    </label>
+                    <div id="pauta-mensagem" class="message" aria-live="polite"></div>
+                    <button type="submit">Cadastrar pauta</button>
+                </form>
+            </article>
+        </section>
+
+        <section class="card list-card">
+            <div class="card-header">
+                <div>
+                    <p class="eyebrow">Dados cadastrados</p>
+                    <h2>Usuários</h2>
+                </div>
+                <button class="secondary" id="atualizar" type="button">Atualizar</button>
+            </div>
+            <div id="mensagem" class="message" aria-live="polite"></div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Idade</th>
+                            <th>CPF</th>
+                            <th>E-mail</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="usuarios"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="card list-card">
+            <div class="card-header">
+                <div>
+                    <p class="eyebrow">Dados cadastrados</p>
+                    <h2>Pautas</h2>
+                </div>
+            </div>
+            <div id="pautas" class="pauta-list"></div>
+        </section>
+    </main>
+    <script src="/app.js"></script>
+</body>
+</html>
